@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrivateEyes: Gaze-Preserving Anonymization for Data Sharing</title>
+    <style>
+        /* Modern, clean CSS inspired by academic project pages */
+        :root {
+            --primary-color: #209CEE;
+            --text-color: #363636;
+            --bg-color: #ffffff;
+            --max-width: 900px;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            font-weight: 400;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .conference {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .authors {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .authors a {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .authors a:hover {
+            text-decoration: underline;
+        }
+        .affiliations {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background-color: #363636;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn:hover {
+            background-color: var(--primary-color);
+        }
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            /* Box-shadow removed here */
+        }
+        .caption {
+            text-align: justify;
+            font-size: 0.95rem;
+            color: #555;
+            margin-top: 10px;
+        }
+        .abstract-text, .method-text {
+            text-align: justify;
+            font-size: 1.1rem;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+        ul {
+            text-align: left;
+            font-size: 1.1rem;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>PrivateEyes: Gaze-Preserving Anonymization for Data Sharing</h1>
+    <div class="conference">CVPR 2026</div>
+    
+    <div class="authors">
+        <a href="#">Surabhi Gupta</a><sup>1*</sup>, 
+        <a href="#">Dinesh Prabhu Muthumariappan</a><sup>1*</sup>, 
+        <a href="#">Biplab Das</a><sup>1</sup>, <br>
+        <a href="#">Anoop Kolar Rajagopal</a><sup>1</sup>, 
+        <a href="#">Kiran Nanjunda Iyer</a><sup>1</sup>, 
+        <a href="#">Donghwan Seo</a><sup>2</sup>
+    </div>
+    
+    <div class="affiliations">
+        <sup>1</sup>Samsung R&D Institute-Bangalore (India) &nbsp;&nbsp;&nbsp; 
+        <sup>2</sup>Samsung Electronics <br>
+        <small><i>*Equal contribution</i></small>
+    </div>
+
+    <div class="links">
+        <a href="https://cvpr.thecvf.com/virtual/2026/poster/37919" target="_blank" class="btn">📄 Paper</a>
+        <a href="#" class="btn">💻 Code (Coming Soon)</a>
+        <a href="#" class="btn">🖼️ Poster</a>
+    </div>
+
+    <div class="image-container">
+        <img src="./teaser_times.png" alt="PrivateEyes Teaser: Comparison of our approach with SOTA" style="max-width: 70%;">
+        <div class="caption">
+            <strong>Figure 1. PrivateEyes:</strong> Our proposed approach synthesizes a gaze-preserving eye image from an input eye image while removing iris-specific identity information. In contrast, latest SOTA anonymization method degrade gaze accuracy while still retaining identifiable iris features.
+        </div>
+    </div>
+
+    <h2>Abstract</h2>
+    <div class="abstract-text">
+        <p>Eye images captured from wearable devices such as head-mounted displays (HMDs) contain identifiable biometric cues, posing significant challenges for safe data sharing. Existing eye anonymization techniques often degrade downstream performance, particularly gaze estimation while still retaining iris-recognizable features. Although these methods aim to anonymize the iris, they introduce noticeable visual artifacts that reduce image fidelity. To address these limitations, we propose PrivateEyes, a privacy-preserving framework that synthesizes anonymized yet gaze-consistent eye images. </p>
+        
+        <p>Our approach employs a three-stage pipeline: (1) a deep segmentation network that isolates semantic eye regions and provides structural control signals for synthesis, (2) a pose estimation network (PEN) trained on anatomically accurate synthetic eye renders to infer precise eye pose, and (3) a conditional diffusion model that reconstructs realistic, anonymized eye images conditioned on segmentation and pose. Extensive experiments across multiple benchmark datasets show that PrivateEyes achieves superior gaze-estimation accuracy compared to state-of-the-art anonymization baselines, improving performance by over 10% while reducing iris-recognition accuracy by ~50%. Our method also produces higher-fidelity images compared to other existing approaches. By enabling task-preserving and privacy-secure sharing of eye images, PrivateEyes supports responsible research and development in AR/VR and other gaze-driven applications.</p>
+    </div>
+
+    <h2>Methodology</h2>
+    <div class="method-text">
+        <p>We adopt a geometry-grounded modular pipeline over an end-to-end generator to provide explicit control over gaze interpretability and enable targeted improvements without full retraining. The pipeline consists of three key modules:</p>
+        
+        <ul>
+            <li><strong>Eye Segmenter:</strong> Utilizes a GhostNet backbone to segment the eye into pupil, iris, and sclera regions.</li>
+            <li><strong>Eye Pose Estimator:</strong> Constructs an anatomically accurate 3D eye model and applies backward ray tracing to generate images with varying continuous eye poses. Ellipse features extracted from these images are fed into an PEN to predict different eye poses, forming the training step.</li>
+            <li><strong>ControlEye:</strong> During inference, ellipse parameters are estimated from the segmented image to generate an eye pose embedding. This embedding is then processed by a CLIP encoder to obtain a control vector, which is used by a fine-tuned ControlNet to synthesize a realistic eye image that preserves gaze while anonymizing identity.</li>
+        </ul>
+    </div>
+
+    <div class="image-container">
+        <img src="./arch_times.png" alt="PrivateEyes Architecture">
+        <div class="caption">
+            <strong>Figure 2. Proposed Method.</strong> Overview of the Eye Segmenter, Eye Pose Estimator (PEN), and ControlEye modules.
+        </div>
+    </div>
+
+    <h2>Results</h2>
+    <div class="method-text">
+        <p>Effective privacy-preserving gaze tracking requires maintaining a balance between strong anonymization (low iris recognition accuracy) and high task utility (low gaze error). PrivateEyes achieves substantially lower gaze-estimation error while also reducing iris-recognition accuracy (indicating stronger anonymization), demonstrating superior task utility across all benchmarks.</p>
+    </div>
+
+    <div class="image-container">
+        <img src="./sota_results_times.png" alt="Qualitative Results Comparison">
+        <div class="caption">
+            <strong>Figure 4. Image Quality.</strong> Qualitative comparison of anonymized eye images across multiple evaluation datasets (OpenEDS-2019, EV-Eye, LPW).
+        </div>
+    </div>
+
+    <h2>Citation</h2>
+    <pre><code>@inproceedings{gupta2026privateeyes,
+  title={PrivateEyes: Gaze-Preserving Anonymization for Data Sharing},
+  author={Gupta, Surabhi and Muthumariappan, Dinesh Prabhu and Das, Biplab and Rajagopal, Anoop Kolar and Iyer, Kiran Nanjunda and Seo, Donghwan},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2026}
+}</code></pre>
+
+</div>
+
+</body>
+</html>
