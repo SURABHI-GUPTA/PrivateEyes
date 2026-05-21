@@ -1,491 +1,536 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrivateEyes: Gaze-Preserving Anonymization for Data Sharing</title>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="PrivateEyes: Gaze-Preserving Anonymization for Data Sharing">
+  <meta name="keywords" content="PrivateEyes, Gaze, Privacy, CVPR 2026">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&display=swap"
+  <title>PrivateEyes: Gaze-Preserving Anonymization for Data Sharing</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
 
-    <style>
-        :root {
-            --text: #222222;
-            --muted: #666666;
-            --border: #dddddd;
-            --bg-soft: #f8f8f8;
-            --primary: #2d6cdf;
-            --max-width: 980px;
-        }
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
-        * {
-            box-sizing: border-box;
-        }
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
 
-        body {
-            margin: 0;
-            padding: 0;
-            background: white;
-            color: var(--text);
-            font-family: 'Source Sans 3', sans-serif;
-            line-height: 1.65;
-        }
+  <style>
 
-        .container {
-            width: 100%;
-            max-width: var(--max-width);
-            margin: auto;
-            padding: 40px 24px 80px;
-        }
+    body {
+      font-family: 'Noto Sans', sans-serif;
+      color: #222;
+    }
 
-        /* HEADER */
+    .publication-title {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      color: #1f4e79;
+      line-height: 1.15;
+    }
 
-        .conference {
-            text-align: center;
-            margin-bottom: 18px;
-        }
+    .publication-authors {
+      font-family: 'Google Sans', sans-serif;
+    }
 
-        .conference img {
-            width: 200px;
-            margin-bottom: 8px;
-        }
+    .publication-authors a {
+      color: #3273dc !important;
+      text-decoration: none;
+    }
 
-        .conference-text {
-            font-size: 1.3rem;
-            color: var(--muted);
-            font-weight: 600;
-        }
+    .publication-authors a:hover {
+      text-decoration: underline;
+    }
 
-        h1 {
-            text-align: center;
-            font-size: clamp(2.2rem, 5vw, 3.6rem);
-            line-height: 1.15;
-            font-weight: 700;
-            margin-top: 10px;
-            margin-bottom: 24px;
-			color: #404180
-        }
+    .publication-links .button {
+      border-radius: 999px;
+      margin: 0.25rem;
+    }
 
-        .tagline {
-            text-align: center;
-            font-size: 1.3rem;
-            color: var(--muted);
-            margin-bottom: 34px;
-			color: #27780E;
-			font-weight: 600;
-        }
+    .cvpr-logo {
+      width: 150px;
+      margin-bottom: 1rem;
+    }
 
-        .authors {
-            text-align: center;
-            font-size: 1.0rem;
-            margin-bottom: 12px;
-        }
+    .teaser-image {
+      width: 80%;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
 
-        .authors a {
-            text-decoration: none;
-            color: var(--primary);
-        }
+    .arch-image,
+    .results-image {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
 
-        .authors a:hover {
-            text-decoration: underline;
-        }
+    .caption {
+      margin-top: 0.8rem;
+      color: #666;
+      font-size: 0.96rem;
+      text-align: justify;
+    }
 
-        .affiliations {
-            text-align: center;
-            color: var(--muted);
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-        }
+    .section-title {
+      text-align: center;
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
 
-        /* BUTTONS */
+    .method-block {
+      border-left: 3px solid #3273dc;
+      padding-left: 1rem;
+      margin-bottom: 1.8rem;
+    }
 
-        .links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 45px;
-        }
+    .method-block h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
 
-        .btn {
-            text-decoration: none;
-            border: 1px solid var(--border);
-            padding: 5px 10px;
-            border-radius: 6px;
-            color: var(--text);
-            font-weight: 600;
-            transition: all 0.2s ease;
-            background: white;
-        }
+    .bibtex {
+      border-radius: 10px;
+    }
 
-        .btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: #f4f8ff;
-        }
+    @media screen and (max-width: 768px) {
 
-        /* SECTIONS */
+      .teaser-image {
+        width: 100%;
+      }
 
-        section {
-            margin-top: 65px;
-        }
+      .cvpr-logo {
+        width: 120px;
+      }
 
-        h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 18px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 8px;
-			text-align: center;
-        }
+    }
 
-        p {
-            font-size: 1.06rem;
-            text-align: justify;
-        }
-
-        /* IMAGE */
-
-        .image-block {
-            margin-top: 28px;
-            text-align: center;
-        }
-
-        .image-block img {
-            max-width: 95%;
-            transition: transform 0.2s ease;
-        }
-
-        .image-block img:hover {
-            transform: scale(1.01);
-        }
-
-        .teaser img {
-            width: 50%;
-        }
-
-        .caption {
-            margin-top: 10px;
-            color: var(--muted);
-            font-size: 0.95rem;
-            text-align: justify;
-        }
-
-        /* METHOD GRID */
-
-        /* METHOD LIST */
-
-		.method-list {
-			margin-top: 28px;
-		}
-
-		.method-item {
-			display: flex;
-			gap: 18px;
-			margin-bottom: 28px;
-			padding-left: 18px;
-			border-left: 3px solid #dfe6ee;
-		}
-
-		.method-number {
-			font-size: 1.4rem;
-			font-weight: 700;
-			color: var(--primary);
-			min-width: 28px;
-			line-height: 1.2;
-		}
-
-		.method-content h3 {
-			margin: 0 0 8px 0;
-			font-size: 1.18rem;
-			font-weight: 700;
-		}
-
-		.method-content p {
-			margin: 0;
-			color: var(--muted);
-			font-size: 1rem;
-			text-align: justify;
-			line-height: 1.65;
-		}
-
-        /* CITATION */
-
-        pre {
-            background: var(--bg-soft);
-            border: 1px solid var(--border);
-            padding: 18px;
-            border-radius: 6px;
-            overflow-x: auto;
-            font-size: 0.80 rem;
-        }
-
-        /* CONTACT */
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 14px;
-            margin-top: 22px;
-        }
-
-        /* FOOTER */
-
-        footer {
-            margin-top: 90px;
-            text-align: center;
-            color: var(--muted);
-            font-size: 0.80 rem;
-        }
-
-        @media(max-width:768px) {
-
-            .teaser img {
-                width: 100%;
-            }
-
-            h2 {
-                font-size: 1.7rem;
-            }
-        }
-    </style>
+  </style>
 </head>
 
 <body>
 
-    <div class="container">
+<!-- TITLE -->
 
-        <!-- HEADER -->
+<section class="hero">
 
-        <div class="conference">
+  <div class="hero-body">
 
-            <!-- Put cvpr_logo.png in same folder -->
-            <img src="./CVPR_Logo1_Denver 2026_Color.png" alt="CVPR 2026 Logo">
+    <div class="container is-max-desktop">
 
-            <div class="conference-text">
-                IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) 2026
-            </div>
+      <div class="columns is-centered">
 
-        </div>
+        <div class="column has-text-centered">
 
-        <h1>
+          <img src="./cvpr_logo.png"
+               class="cvpr-logo">
+
+          <h1 class="title is-1 publication-title">
             PrivateEyes: Gaze-Preserving Anonymization for Data Sharing
-        </h1>
+          </h1>
 
-        <div class="tagline">
-            Privacy-preserving eye-image anonymization that preserves gaze accuracy while removing iris identity
-        </div>
+          <div class="is-size-5 publication-authors">
 
-        <div class="authors">
+            <span class="author-block">
+              <a href="#">Surabhi Gupta</a><sup>1*</sup>,
+            </span>
 
-            <a href="https://in.linkedin.com/in/surabhi-gupta-02">Surabhi Gupta</a><sup>1*</sup>,
-            <a href="https://in.linkedin.com/in/dinesh-prabhu-07152b194">Dinesh Prabhu Muthumariappan</a><sup>1*</sup>,
-            <a href="https://in.linkedin.com/in/biplab-das-645715102">Biplab Das</a><sup>1</sup>,
-            <a href="#">Anoop Kolar Rajagopal</a><sup>1</sup>,
-            <a href="#">Kiran Nanjunda Iyer</a><sup>1</sup>,
-            <a href="#">Donghwan Seo</a><sup>2</sup>
+            <span class="author-block">
+              <a href="#">Dinesh Prabhu Muthumariappan</a><sup>1*</sup>,
+            </span>
 
-        </div>
-
-        <div class="affiliations">
-
-            <sup>1</sup>Samsung R&D Institute-Bangalore (India)
-            &nbsp;&nbsp;&nbsp;
-            <sup>2</sup>Samsung Electronics
+            <span class="author-block">
+              <a href="#">Biplab Das</a><sup>1</sup>
+            </span>
 
             <br>
 
-            <small><i>*Equal contribution</i></small>
+            <span class="author-block">
+              <a href="#">Anoop Kolar Rajagopal</a><sup>1</sup>,
+            </span>
+
+            <span class="author-block">
+              <a href="#">Kiran Nanjunda Iyer</a><sup>1</sup>,
+            </span>
+
+            <span class="author-block">
+              <a href="#">Donghwan Seo</a><sup>2</sup>
+            </span>
+
+          </div>
+
+          <div class="is-size-5 publication-authors">
+
+            <span class="author-block">
+              <sup>1</sup>Samsung R&D Institute-Bangalore (India)
+            </span>
+
+            &nbsp;&nbsp;&nbsp;
+
+            <span class="author-block">
+              <sup>2</sup>Samsung Electronics
+            </span>
+
+            <br>
+
+            <span class="author-block">
+              <small><i>*Equal contribution</i></small>
+            </span>
+
+          </div>
+
+          <!-- LINKS -->
+
+          <div class="publication-links">
+
+            <span class="link-block">
+
+              <a href="https://cvpr.thecvf.com/virtual/2026/poster/37919"
+                 class="external-link button is-dark is-rounded">
+
+                <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+                </span>
+
+                <span>Paper</span>
+
+              </a>
+
+            </span>
+
+            <span class="link-block">
+
+              <a href="https://www.youtube.com/watch?v=haY_YweRLaI"
+                 class="external-link button is-dark is-rounded">
+
+                <span class="icon">
+                  <i class="fab fa-youtube"></i>
+                </span>
+
+                <span>Video</span>
+
+              </a>
+
+            </span>
+
+            <span class="link-block">
+
+              <a href="https://cvpr.thecvf.com/media/PosterPDFs/CVPR%202026/37919.png?t=1779287294.4479885"
+                 class="external-link button is-dark is-rounded">
+
+                <span class="icon">
+                  <i class="fas fa-image"></i>
+                </span>
+
+                <span>Poster</span>
+
+              </a>
+
+            </span>
+
+          </div>
 
         </div>
 
-        <!-- LINKS -->
+      </div>
 
-        <div class="links">
+    </div>
 
-            <a href="https://cvpr.thecvf.com/virtual/2026/poster/37919"
-                target="_blank"
-                class="btn">
-                📄 Paper
-            </a>
+  </div>
 
-            <a href="https://www.youtube.com/watch?v=haY_YweRLaI"
-                class="btn">
-                🎥 Video
-            </a>
+</section>
 
-            <a href="https://cvpr.thecvf.com/media/PosterPDFs/CVPR%202026/37919.png?t=1779287294.4479885"
-                class="btn">
-                🖼️ Poster
-            </a>
+<!-- TEASER -->
 
-        </div>
+<section class="hero teaser">
 
-        <!-- TEASER -->
+  <div class="container is-max-desktop">
 
-        <div class="image-block teaser">
+    <div class="hero-body has-text-centered">
 
-            <img src="./teaser_times.png"
-                alt="PrivateEyes teaser image">
+      <img src="./teaser_times.png"
+           class="teaser-image">
 
-            <div class="caption">
+      <h2 class="subtitle has-text-justified">
 
-            <strong>Figure 1. PrivateEyes:</strong> Our proposed approach synthesizes a gaze-preserving eye image from an input eye image while removing iris-specific identity information. In contrast, latest SOTA anonymization method degrade gaze accuracy while still retaining identifiable iris features.
+        <strong>Figure 1.</strong>
 
-            </div>
+        Our proposed approach synthesizes a gaze-preserving eye image from an
+        input eye image while removing iris-specific identity information.
+        Existing state-of-the-art anonymization approaches degrade gaze
+        accuracy while still retaining identifiable iris features.
 
-        </div>
+      </h2>
 
-        <!-- ABSTRACT -->
+    </div>
 
-        <section>
+  </div>
 
-            <h2>Abstract</h2>
+</section>
 
-            <p>
-                Eye images captured from wearable devices such as head-mounted
-                displays (HMDs) contain identifiable biometric cues, posing
-                significant challenges for safe data sharing. Existing eye
-                anonymization techniques often degrade downstream performance,
-                particularly gaze estimation while still retaining
-                iris-recognizable features.
-            </p>
+<!-- ABSTRACT -->
 
-            <p>
-                To address these limitations, we propose PrivateEyes, a
-                privacy-preserving framework that synthesizes anonymized yet
-                gaze-consistent eye images. Our approach employs a three-stage pipeline:
-                (1) a deep segmentation network that isolates semantic eye
-                regions and provides structural control signals for synthesis,
-                (2) a pose estimation network (PEN) trained on anatomically
-                accurate synthetic eye renders to infer precise eye pose,
-                and (3) a conditional diffusion model that reconstructs
-                realistic anonymized eye images conditioned on segmentation
-                and pose. Extensive experiments across multiple benchmark datasets
-                show that PrivateEyes achieves superior gaze-estimation
-                accuracy compared to state-of-the-art anonymization
-                baselines while significantly reducing iris-recognition
-                accuracy.
-            </p>
+<section class="section">
 
-        </section>
+  <div class="container is-max-desktop">
 
-        <!-- METHOD -->
+    <h2 class="title is-3 section-title">
+      Abstract
+    </h2>
 
-        <section>
+    <div class="content has-text-justified">
 
-            <h2>Method</h2>
+      <p>
+        Eye images captured from wearable devices such as head-mounted
+        displays (HMDs) contain identifiable biometric cues, posing
+        significant challenges for safe data sharing. Existing eye
+        anonymization techniques often degrade downstream performance,
+        particularly gaze estimation while still retaining
+        iris-recognizable features.
+      </p>
 
-			<p>We adopt a geometry-grounded modular pipeline over an end-to-end generator to provide explicit control over gaze interpretability and enable targeted improvements without full retraining. The pipeline consists of three key modules:</p>
+      <p>
+        To address these limitations, we propose PrivateEyes, a
+        privacy-preserving framework that synthesizes anonymized yet
+        gaze-consistent eye images.
+      </p>
 
+      <p>
+        Our approach employs a three-stage pipeline:
+        (1) a deep segmentation network that isolates semantic eye
+        regions and provides structural control signals for synthesis,
+        (2) a pose estimation network (PEN) trained on anatomically
+        accurate synthetic eye renders to infer precise eye pose,
+        and (3) a conditional diffusion model that reconstructs
+        realistic anonymized eye images conditioned on segmentation
+        and pose.
+      </p>
 
-            <div class="method-grid">
+      <p>
+        Extensive experiments across multiple benchmark datasets
+        show that PrivateEyes achieves superior gaze-estimation
+        accuracy compared to state-of-the-art anonymization
+        baselines while significantly reducing iris-recognition
+        accuracy.
+      </p>
 
-				<ul>
-					<li><strong>Eye Segmenter:</strong> Utilizes a GhostNet backbone to segment the eye into pupil, iris, and sclera regions.</li>
-					<li><strong>Eye Pose Estimator:</strong> Constructs an anatomically accurate 3D eye model and applies backward ray tracing to generate images with varying continuous eye poses. Ellipse features extracted from these images are fed into an PEN to predict different eye poses, forming the training step.</li>
-					<li><strong>ControlEye:</strong> During inference, ellipse parameters are estimated from the segmented image to generate an eye pose embedding. This embedding is then processed by a CLIP encoder to obtain a control vector, which is used by a fine-tuned ControlNet to synthesize a realistic eye image that preserves gaze while anonymizing identity.</li>
-				</ul>
+    </div>
 
-            </div>
+  </div>
 
-            <div class="image-block">
+</section>
 
-                <img src="./arch_times.png"
-                    alt="PrivateEyes architecture">
+<!-- METHOD -->
 
-                <div class="caption">
+<section class="section">
 
-				<strong>Figure 2. Proposed Method.</strong> Overview of the Eye Segmenter, Eye Pose Estimator (PEN), and ControlEye modules.
+  <div class="container is-max-desktop">
 
+    <h2 class="title is-3 section-title">
+      Method
+    </h2>
 
-                </div>
+    <div class="content has-text-justified">
 
-            </div>
+      <p>
+        We adopt a geometry-grounded modular pipeline over an
+        end-to-end generator to provide explicit control over
+        gaze interpretability and enable targeted improvements
+        without full retraining.
+      </p>
 
-        </section>
+    </div>
 
-        <!-- RESULTS -->
+    <div class="method-block">
 
-        <section>
+      <h3>1. Eye Segmenter</h3>
 
-            <h2>Results</h2>
+      <p>
+        Utilizes a GhostNet backbone to segment the eye into
+        pupil, iris, and sclera regions.
+      </p>
 
-            <p>
-                Effective privacy-preserving gaze tracking requires balancing
-                strong anonymization (low iris recognition accuracy) and
-                high task utility (low gaze error). PrivateEyes achieves
-                substantially lower gaze-estimation error while simultaneously
-                reducing iris-recognition accuracy across all evaluation
-                benchmarks.
-            </p>
+    </div>
 
-            <div class="image-block">
+    <div class="method-block">
 
-                <img src="./sota_qualitative_times.png"
-                    alt="Qualitative results">
+      <h3>2. Eye Pose Estimator (PEN)</h3>
 
-                <div class="caption">
+      <p>
+        Uses anatomically accurate synthetic eye rendering and
+        backward ray tracing to infer continuous eye pose.
+      </p>
 
-                    <strong>Figure 3. Image Quality.</strong> Qualitative comparison of anonymized eye images across multiple evaluation datasets (OpenEDS-2019, EV-Eye, LPW).
+    </div>
 
+    <div class="method-block">
 
-                </div>
+      <h3>3. ControlEye</h3>
 
-            </div>
+      <p>
+        Uses segmentation and pose embeddings with
+        ControlNet synthesis for gaze-preserving
+        anonymized image generation.
+      </p>
 
-        </section>
+    </div>
 
-        <!-- CITATION -->
+    <div class="columns is-centered">
 
-        <section>
+      <div class="column is-full-width">
 
-            <h2>Citation</h2>
+        <img src="./arch_times.png"
+             class="arch-image">
 
-<pre><code>@inproceedings{gupta2026privateeyes,
+        <p class="caption">
+
+          <strong>Figure 2.</strong>
+
+          Overview of the Eye Segmenter,
+          Eye Pose Estimator (PEN),
+          and ControlEye modules.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- RESULTS -->
+
+<section class="section">
+
+  <div class="container is-max-desktop">
+
+    <h2 class="title is-3 section-title">
+      Results
+    </h2>
+
+    <div class="content has-text-justified">
+
+      <p>
+        Effective privacy-preserving gaze tracking requires balancing
+        strong anonymization (low iris recognition accuracy) and
+        high task utility (low gaze error). PrivateEyes achieves
+        substantially lower gaze-estimation error while simultaneously
+        reducing iris-recognition accuracy across all evaluation
+        benchmarks.
+      </p>
+
+    </div>
+
+    <div class="columns is-centered">
+
+      <div class="column is-full-width">
+
+        <img src="./sota_qualitative_times.png"
+             class="results-image">
+
+        <p class="caption">
+
+          <strong>Figure 4.</strong>
+
+          Qualitative comparison of anonymized eye images across
+          multiple evaluation datasets including OpenEDS-2019,
+          EV-Eye, and LPW.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- BIBTEX -->
+
+<section class="section">
+
+  <div class="container is-max-desktop">
+
+    <h2 class="title is-3 section-title">
+      BibTeX
+    </h2>
+
+<pre class="bibtex"><code>@inproceedings{gupta2026privateeyes,
   title={PrivateEyes: Gaze-Preserving Anonymization for Data Sharing},
   author={Gupta, Surabhi and Muthumariappan, Dinesh Prabhu and Das, Biplab and Rajagopal, Anoop Kolar and Iyer, Kiran Nanjunda and Seo, Donghwan},
   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   year={2026}
 }</code></pre>
 
-        </section>
+  </div>
 
-        <!-- CONTACT -->
+</section>
 
-        <section>
+<!-- CONTACT -->
 
-            <h2>Contact</h2>
+<section class="section">
 
-            <p>
-                For questions, collaborations, or any other inquiries,
-                please contact:
-            </p>
+  <div class="container is-max-desktop">
 
-            <div class="contact-links">
+    <h2 class="title is-3 section-title">
+      Contact
+    </h2>
 
-                <a href="mailto:surabhi.g@samsung.com"
-                    class="btn">
-                    ✉️ surabhi.g@samsung.com
-                </a>
+    <div class="columns is-centered has-text-centered">
 
-                <a href="mailto:m.prabhu@samsung.com"
-                    class="btn">
-                    ✉️ m.prabhu@samsung.com
-                </a>
+      <div class="column is-half">
 
-            </div>
+        <a href="mailto:surabhi.g@samsung.com"
+           class="button is-light is-rounded is-fullwidth">
 
-        </section>
+          ✉️ surabhi.g@samsung.com
 
-        <footer>
-            © 2026 PrivateEyes Project Page
-        </footer>
+        </a>
+
+      </div>
+
+      <div class="column is-half">
+
+        <a href="mailto:m.prabhu@samsung.com"
+           class="button is-light is-rounded is-fullwidth">
+
+          ✉️ m.prabhu@samsung.com
+
+        </a>
+
+      </div>
 
     </div>
 
-</body>
+  </div>
 
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+  <div class="container">
+
+    <div class="content has-text-centered">
+
+      <p>
+        © 2026 PrivateEyes Project Page
+      </p>
+
+    </div>
+
+  </div>
+
+</footer>
+
+</body>
 </html>
