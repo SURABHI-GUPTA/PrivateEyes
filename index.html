@@ -20,16 +20,26 @@
 
   <style>
 
+    /* ---------------- GENERAL ---------------- */
+
     body {
       font-family: 'Noto Sans', sans-serif;
       color: #222;
+      line-height: 1.7;
     }
+
+    .container.is-max-desktop {
+      max-width: 1100px !important;
+    }
+
+    /* ---------------- TITLE ---------------- */
 
     .publication-title {
       font-family: 'Google Sans', sans-serif;
       font-weight: 700;
       color: #1f4e79;
       line-height: 1.15;
+      margin-bottom: 1.2rem;
     }
 
     .publication-authors {
@@ -45,38 +55,89 @@
       text-decoration: underline;
     }
 
+    /* ---------------- BUTTONS ---------------- */
+
+    .publication-links {
+      margin-top: 1.5rem;
+    }
+
     .publication-links .button {
       border-radius: 999px;
-      margin: 0.25rem;
+      margin: 0.3rem;
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
     }
+
+    /* ---------------- CVPR LOGO ---------------- */
 
     .cvpr-logo {
-      width: 250px;
-      margin-bottom: 1rem;
+      width: 240px;
+      margin-bottom: 1.5rem;
     }
 
-    .teaser-image {
-      width: 70%;
-	}
-
-    .arch-image,
-    .results-image {
-      width: 90%;
-	}
-
-    .caption {
-      margin-top: 0.8rem;
-      color: #666;
-      font-size: 0.9rem;
-      text-align: justify;
-    }
+    /* ---------------- SECTION TITLES ---------------- */
 
     .section-title {
       text-align: center;
       font-family: 'Google Sans', sans-serif;
       font-weight: 700;
       margin-bottom: 2rem;
+      color: #222;
     }
+
+    /* ---------------- CONTENT SPACING ---------------- */
+
+    .content p {
+      margin-bottom: 1.25rem;
+    }
+
+    .content ul {
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .content li {
+      margin-bottom: 0.7rem;
+    }
+
+    /* ---------------- FIGURE SYSTEM ---------------- */
+
+    .figure-container {
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .figure-container img {
+      display: block;
+      margin: 0 auto;
+      border-radius: 10px;
+    }
+
+    .teaser-image {
+      width: 72%;
+    }
+
+    .arch-image,
+    .results-image {
+      width: 92%;
+    }
+
+    /* ---------------- CAPTIONS ---------------- */
+
+    .figure-caption {
+      margin-top: 1rem;
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: #555;
+      text-align: justify;
+      max-width: 92%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ---------------- METHOD BLOCK ---------------- */
 
     .method-block {
       border-left: 3px solid #3273dc;
@@ -90,18 +151,43 @@
       margin-bottom: 0.5rem;
     }
 
+    /* ---------------- BIBTEX ---------------- */
+
     .bibtex {
       border-radius: 10px;
+      padding: 1rem;
+      background: #f5f5f5;
+      overflow-x: auto;
     }
+
+    /* ---------------- FOOTER ---------------- */
+
+    footer.footer {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    /* ---------------- MOBILE ---------------- */
 
     @media screen and (max-width: 768px) {
 
-      .teaser-image {
+      .cvpr-logo {
+        width: 130px;
+      }
+
+      .teaser-image,
+      .arch-image,
+      .results-image {
         width: 100%;
       }
 
-      .cvpr-logo {
-        width: 120px;
+      .figure-caption {
+        max-width: 100%;
+        font-size: 0.92rem;
+      }
+
+      .publication-title {
+        font-size: 2rem !important;
       }
 
     }
@@ -247,16 +333,21 @@
 
   <div class="container is-max-desktop">
 
-    <div class="hero-body has-text-centered">
+    <div class="hero-body">
 
-      <img src="./teaser_times.png"
-           class="teaser-image">
+      <div class="figure-container">
 
-      <h2 class="subtitle has-text-justified">
+        <img src="./teaser_times.png"
+             class="teaser-image">
 
-            <strong>Figure 1. PrivateEyes:</strong> Our proposed approach synthesizes a gaze-preserving eye image from an input eye image while removing iris-specific identity information. In contrast, latest SOTA anonymization method degrade gaze accuracy while still retaining identifiable iris features.
+        <p class="figure-caption">
 
-      </h2>
+          <strong>Figure 1. PrivateEyes:</strong>
+          Our proposed approach synthesizes a gaze-preserving eye image from an input eye image while removing iris-specific identity information. In contrast, latest SOTA anonymization methods degrade gaze accuracy while still retaining identifiable iris features.
+
+        </p>
+
+      </div>
 
     </div>
 
@@ -276,31 +367,31 @@
 
     <div class="content has-text-justified">
 
-            <p>
-                Eye images captured from wearable devices such as head-mounted
-                displays (HMDs) contain identifiable biometric cues, posing
-                significant challenges for safe data sharing. Existing eye
-                anonymization techniques often degrade downstream performance,
-                particularly gaze estimation while still retaining
-                iris-recognizable features.
-            </p>
+      <p>
+        Eye images captured from wearable devices such as head-mounted
+        displays (HMDs) contain identifiable biometric cues, posing
+        significant challenges for safe data sharing. Existing eye
+        anonymization techniques often degrade downstream performance,
+        particularly gaze estimation while still retaining
+        iris-recognizable features.
+      </p>
 
-            <p>
-                To address these limitations, we propose PrivateEyes, a
-                privacy-preserving framework that synthesizes anonymized yet
-                gaze-consistent eye images. Our approach employs a three-stage pipeline:
-                (1) a deep segmentation network that isolates semantic eye
-                regions and provides structural control signals for synthesis,
-                (2) a pose estimation network (PEN) trained on anatomically
-                accurate synthetic eye renders to infer precise eye pose,
-                and (3) a conditional diffusion model that reconstructs
-                realistic anonymized eye images conditioned on segmentation
-                and pose. Extensive experiments across multiple benchmark datasets
-                show that PrivateEyes achieves superior gaze-estimation
-                accuracy compared to state-of-the-art anonymization
-                baselines while significantly reducing iris-recognition
-                accuracy.
-            </p>
+      <p>
+        To address these limitations, we propose PrivateEyes, a
+        privacy-preserving framework that synthesizes anonymized yet
+        gaze-consistent eye images. Our approach employs a three-stage pipeline:
+        (1) a deep segmentation network that isolates semantic eye
+        regions and provides structural control signals for synthesis,
+        (2) a pose estimation network (PEN) trained on anatomically
+        accurate synthetic eye renders to infer precise eye pose,
+        and (3) a conditional diffusion model that reconstructs
+        realistic anonymized eye images conditioned on segmentation
+        and pose. Extensive experiments across multiple benchmark datasets
+        show that PrivateEyes achieves superior gaze-estimation
+        accuracy compared to state-of-the-art anonymization
+        baselines while significantly reducing iris-recognition
+        accuracy.
+      </p>
 
     </div>
 
@@ -320,29 +411,50 @@
 
     <div class="content has-text-justified">
 
-			<p>We adopt a geometry-grounded modular pipeline over an end-to-end generator to provide explicit control over gaze interpretability and enable targeted improvements without full retraining. The pipeline consists of three key modules:</p>
+      <p>
+        We adopt a geometry-grounded modular pipeline over an end-to-end
+        generator to provide explicit control over gaze interpretability
+        and enable targeted improvements without full retraining.
+        The pipeline consists of three key modules:
+      </p>
 
+      <ul>
+
+        <li>
+          <strong>Eye Segmenter:</strong>
+          Utilizes a GhostNet backbone to segment the eye into pupil,
+          iris, and sclera regions.
+        </li>
+
+        <li>
+          <strong>Eye Pose Estimator:</strong>
+          Constructs an anatomically accurate 3D eye model and applies
+          backward ray tracing to generate images with varying continuous
+          eye poses.
+        </li>
+
+        <li>
+          <strong>ControlEye:</strong>
+          During inference, ellipse parameters are estimated from the
+          segmented image to generate an eye pose embedding.
+        </li>
+
+      </ul>
 
     </div>
 
-    			<ul>
-					<li><strong>Eye Segmenter:</strong> Utilizes a GhostNet backbone to segment the eye into pupil, iris, and sclera regions.</li>
-					<li><strong>Eye Pose Estimator:</strong> Constructs an anatomically accurate 3D eye model and applies backward ray tracing to generate images with varying continuous eye poses. Ellipse features extracted from these images are fed into an PEN to predict different eye poses, forming the training step.</li>
-					<li><strong>ControlEye:</strong> During inference, ellipse parameters are estimated from the segmented image to generate an eye pose embedding. This embedding is then processed by a CLIP encoder to obtain a control vector, which is used by a fine-tuned ControlNet to synthesize a realistic eye image that preserves gaze while anonymizing identity.</li>
-				</ul>
+    <div class="figure-container">
 
-    <div class="columns is-centered">
+      <img src="./arch_times.png"
+           class="arch-image">
 
-      <div class="column is-full-width">
+      <p class="figure-caption">
 
-        <img src="./arch_times.png"
-             class="arch-image">
+        <strong>Figure 2. Proposed Method.</strong>
+        Overview of the Eye Segmenter, Eye Pose Estimator (PEN),
+        and ControlEye modules.
 
-        <p class="caption">
-
-				<strong>Figure 2. Proposed Method.</strong> Overview of the Eye Segmenter, Eye Pose Estimator (PEN), and ControlEye modules.
-
-      </div>
+      </p>
 
     </div>
 
@@ -362,30 +474,29 @@
 
     <div class="content has-text-justified">
 
-            <p>
-                Effective privacy-preserving gaze tracking requires balancing
-                strong anonymization (low iris recognition accuracy) and
-                high task utility (low gaze error). PrivateEyes achieves
-                substantially lower gaze-estimation error while simultaneously
-                reducing iris-recognition accuracy across all evaluation
-                benchmarks.
-            </p>
+      <p>
+        Effective privacy-preserving gaze tracking requires balancing
+        strong anonymization (low iris recognition accuracy) and
+        high task utility (low gaze error). PrivateEyes achieves
+        substantially lower gaze-estimation error while simultaneously
+        reducing iris-recognition accuracy across all evaluation
+        benchmarks.
+      </p>
 
     </div>
 
-    <div class="columns is-centered">
+    <div class="figure-container">
 
-      <div class="column is-full-width">
+      <img src="./sota_qualitative_times.png"
+           class="results-image">
 
-        <img src="./sota_qualitative_times.png"
-             class="results-image">
+      <p class="figure-caption">
 
-        <p class="caption">
+        <strong>Figure 3. Image Quality.</strong>
+        Qualitative comparison of anonymized eye images across multiple
+        evaluation datasets (OpenEDS-2019, EV-Eye, LPW).
 
-
-                    <strong>Figure 3. Image Quality.</strong> Qualitative comparison of anonymized eye images across multiple evaluation datasets (OpenEDS-2019, EV-Eye, LPW).
-
-      </div>
+      </p>
 
     </div>
 
